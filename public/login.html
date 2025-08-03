@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Seguro - Sistema de Autenticación</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de login seguro con validación avanzada">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Preconexiones para mejor rendimiento -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles/login.css">
+
+  <!-- Seguridad adicional -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.emailjs.com;">
+
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <div class="logo">🔐</div>
+      <h1>Iniciar Sesión</h1>
+      <p>Acceso seguro al sistema</p>
+    </div>
+
+    <div class="attempts-warning" id="attemptsWarning" style="display:none;">
+      <div class="warning-icon">⚠</div>
+      <div class="warning-text">
+        <strong>Sistema bloqueado temporalmente</strong><br>
+        Demasiados intentos fallidos. Espera <span id="lockoutTimer">30</span> segundos.
+      </div>
+    </div>
+
+    <form id="loginForm" autocomplete="off" novalidate>
+      <div class="form-group">
+        <label for="username">
+          <span class="label-text">Usuario</span>
+          <span class="required">*</span>
+        </label>
+        <div class="input-container">
+          <input type="text" id="username" name="username" required minlength="3" maxlength="50" autocomplete="username" placeholder="Ingresa tu usuario">
+          <div class="input-icon">👤</div>
+        </div>
+        <div class="error-message" id="usernameError"></div>
+        <div class="success-message" id="usernameSuccess"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">
+          <span class="label-text">Contraseña</span>
+          <span class="required">*</span>
+        </label>
+        <div class="input-container password-container">
+          <input type="password" id="password" name="password" required minlength="6" maxlength="128" autocomplete="current-password" placeholder="Ingresa tu contraseña">
+          <button type="button" class="password-toggle" id="passwordToggle" aria-label="Mostrar contraseña">
+            <span class="toggle-icon">👁</span>
+          </button>
+        </div>
+        <div class="password-strength" id="passwordStrength"></div>
+        <div class="error-message" id="passwordError"></div>
+        <div class="success-message" id="passwordSuccess"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="role">
+          <span class="label-text">Tipo de Usuario</span>
+          <span class="required">*</span>
+        </label>
+        <div class="input-container">
+          <select id="role" name="role" required>
+            <option value="">Seleccionar tipo de usuario...</option>
+            <option value="usuario">👤 Usuario Regular</option>
+            <option value="admin">👑 Administrador</option>
+            <option value="moderador">🛡 Moderador</option>
+          </select>
+          <div class="select-arrow">▼</div>
+        </div>
+        <div class="error-message" id="roleError"></div>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="rememberMe" name="rememberMe">
+          <span class="checkmark"></span>
+          <span class="checkbox-text">Recordar mi sesión (30 días)</span>
+        </label>
+      </div>
+
+      <button type="submit" class="login-btn" id="loginBtn">
+        <span class="btn-text" id="btnText">Iniciar Sesión</span>
+        <div class="loading" id="loading" style="display:none;">
+          <div class="spinner"></div>
+          <span>Verificando...</span>
+        </div>
+      </button>
+    </form>
+
+    <div class="form-links">
+      <a href="#" class="link" id="forgotPassword">¿Olvidaste tu contraseña?</a>
+      <a href="#" class="link" id="createAccount">Crear nueva cuenta</a>
+    </div>
+
+    <div class="security-info">
+      <div class="security-header">
+        <span class="security-icon">🛡</span>
+        <h4>Características de Seguridad</h4>
+      </div>
+      <ul class="security-list">
+        <li>✅ Validación en tiempo real</li>
+        <li>✅ Protección contra fuerza bruta</li>
+        <li>✅ Encriptación de contraseñas</li>
+        <li>✅ Sanitización de datos</li>
+        <li>✅ Envío seguro por email</li>
+        <li>✅ Bloqueo temporal automático</li>
+      </ul>
+    </div>
+
+    <div class="connection-status" id="connectionStatus">
+      <div class="status-indicator offline" id="statusIndicator"></div>
+      <span class="status-text" id="statusText">Verificando conexión...</span>
+    </div>
+  </div>
+
+  <div class="modal" id="successModal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="success-icon">✅</span>
+        <h3>¡Login Exitoso!</h3>
+      </div>
+      <div class="modal-body" id="modalBody">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="closeModal">Cerrar</button>
+        <button class="btn-primary" id="continueBtn">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" style="display:none;"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="security.js"></script>
+  <script src="validation.js"></script>
+  <script src="email-service.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
