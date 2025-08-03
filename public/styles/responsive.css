@@ -1,13 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-}
-
+/* Estilos base del navbar */
 .navbar {
     background: linear-gradient(135deg, #8B4513, #A0522D);
     padding: 1rem 2rem;
@@ -34,6 +25,8 @@ body {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
@@ -50,6 +43,7 @@ body {
     transform: translateY(-2px);
 }
 
+/* Estilos del botón hamburguesa */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -80,8 +74,12 @@ body {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Estilos para móviles */
+/* Media queries para dispositivos móviles */
 @media screen and (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
     .hamburger {
         display: flex;
     }
@@ -121,57 +119,34 @@ body {
     .nav-link:hover {
         border: 2px solid white;
         background-color: rgba(255, 255, 255, 0.1);
+        transform: none;
     }
 
-    /* Cerrar el menú al hacer click en un enlace */
     .nav-link:focus {
         outline: 2px solid white;
     }
-}
 
-/* Contenido de ejemplo */
-.content {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+    /* Ajustes adicionales para el contenido principal */
+    .main-content {
+        margin-top: 0;
+    }
 
-.welcome-section {
-    background: linear-gradient(45deg, #f4f4f4, #e8e8e8);
-    padding: 3rem;
-    border-radius: 10px;
-    margin: 2rem 0;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.welcome-section h1 {
-    color: #8B4513;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-}
-
-.welcome-section p {
-    color: #666;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-@media screen and (max-width: 768px) {
-    .navbar {
+    .container {
         padding: 1rem;
     }
 
-    .welcome-section {
-        padding: 2rem 1rem;
-        margin: 1rem;
+    .page-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
     }
 
-    .welcome-section h1 {
-        font-size: 2rem;
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
-    .content {
-        padding: 1rem;
+    .action-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
