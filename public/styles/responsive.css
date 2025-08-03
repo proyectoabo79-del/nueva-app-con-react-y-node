@@ -91,15 +91,16 @@
         flex-direction: column;
         background: linear-gradient(135deg, #8B4513, #A0522D);
         width: 50%;
-        height: 100vh;
+        height: 25vh;
         text-align: center;
         transition: 0.3s ease-in-out;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        border-bottom-left-radius: 15px;
         z-index: 1000;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-        gap: 2rem;
-        padding-top: 5rem;
+        gap: 1rem;
+        padding: 1rem;
     }
 
     .nav-menu.active {
@@ -107,13 +108,14 @@
     }
 
     .nav-link {
-        font-size: 1.1rem;
-        padding: 1rem 1.5rem;
-        width: 80%;
+        font-size: 1rem;
+        padding: 0.6rem 1rem;
+        width: 85%;
         text-align: center;
         border: 2px solid transparent;
         border-radius: 8px;
-        margin: 0.5rem 0;
+        margin: 0.2rem 0;
+        white-space: nowrap;
     }
 
     .nav-link:hover {
