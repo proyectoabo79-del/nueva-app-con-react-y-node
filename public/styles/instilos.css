@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(180deg,#8B5A2B 0%, #C47A37 100%);
+  min-height: 100vh;
+}
+header {
+  background: #6b401a;
+  color: #fff;
+  padding-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background: #6b401a;
+}
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 10px 0;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 25px;
+  transition: color 0.2s;
+}
+nav ul li a:hover {
+  color: #ffdcb2;
+}
+header h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 1.45rem;
+  font-weight: 600;
+  padding: 18px 0 10px 0;
+  letter-spacing: .5px;
+}
+main {
+  padding: 30px 0 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card {
+  background: #fbeed7;
+  border-radius: 16px;
+  box-shadow: 0 3px 16px rgba(0,0,0,0.10);
+  margin-bottom: 20px;
+  padding: 24px 32px;
+  width: 420px;
+  max-width: 95vw;
+  color: #6b401a;
+}
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.table label {
+  display: block;
+  margin-bottom: 13px;
+  font-weight: 500;
+  font-size: 0.97rem;
+}
+input[type="text"], input[type="date"], input[type="time"], input[type="number"], select, textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1px solid #e2bb8e;
+  margin-top: 5px;
+  font-size: 1rem;
+  background: #fff7ec;
+  color: #6b401a;
+  box-sizing: border-box;
+}
+textarea {
+  resize: vertical;
+}
+input[type="checkbox"] {
+  margin-left: 8px;
+}
+.botonera {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.btn-principal {
+  background: #a95c21;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.08rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.09);
+  cursor: pointer;
+  transition: background 0.22s;
+}
+.btn-principal:hover {
+  background: #7c3a10;
+}
+footer {
+  background: #6b401a;
+  color: #fbeed7;
+  text-align: center;
+  padding: 12px 0;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 0.99rem;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.07);
+}
+@media (max-width: 500px) {
+  .card {
+    padding: 14px 7px;
+    width: 98vw;
+  }
+  nav {
+    padding: 0 10px;
+  }
+}
