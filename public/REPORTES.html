@@ -10,20 +10,33 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- jsPDF para PDF -->
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+      <!-- Se creó un archivo CSS separado -->
+<link rel="stylesheet" href="styles/responsive.css">
+
+<!-- Se creó un archivo JS separado, agregar antes del cierre del </body> -->
+<script src="scripts/responsive.js"></script>
+
+
+
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="container">
-            <div class="navbar-content">
-                <a href="#" class="logo">Parque del Café</a>
-                <ul class="nav-links">
-                    <li><a href="index.html" class="active">Inicio</a></li>
-                    <li><a href="#">Solicitudes</a></li>
-                    <li><a href="#">Registradora</a></li>
-                    <li><a href="#">Reportes</a></li>
-                </ul>
-                </button>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Parque del Café</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#" class="nav-link">Inicio</a></li>
+                <li><a href="#" class="nav-link">Solicitudes</a></li>
+                <li><a href="#" class="nav-link">Registradora</a></li>
+                <li><a href="#" class="nav-link">Reportes</a></li>
+            </ul>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>

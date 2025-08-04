@@ -18,17 +18,32 @@
   <!-- Seguridad adicional -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.emailjs.com;">
 
+
+
+
+    <!-- Se creó un archivo CSS separado -->
+<link rel="stylesheet" href="styles/responsive.css">
+
+<!-- Se creó un archivo JS separado, agregar antes del cierre del </body> -->
+<script src="scripts/responsive.js"></script>
+
+
+
 </head>
 <body>
-    <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="container">
-            <div class="navbar-content">
-                <a href="#" class="logo">Parque del Café</a>
-                <ul class="nav-links">
-                    <li><a href="index.html" class="active">Inicio</a></li>
-                </ul>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Parque del Café</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#" class="nav-link">Inicio</a></li>
+            </ul>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
