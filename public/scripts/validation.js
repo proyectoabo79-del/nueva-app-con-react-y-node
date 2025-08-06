@@ -1,5 +1,5 @@
 // validation.js
-// Validación de campos del formulario
+// Validación de campos del formulario para el login 
 
 function sanitize(input) {
   return input.replace(/[<>"'`]/g, '');
@@ -16,7 +16,7 @@ function validateUsername(username) {
 function validatePassword(password) {
   if (!password) return "La contraseña es requerida.";
   if (password.length < 6) return "La contraseña es muy corta.";
-  if (password.length > 128) return "La contraseña es muy larga.";
+  if (password.length > 20) return "La contraseña es muy larga.";
   // Seguridad: debe tener mayúscula, minúscula, número y símbolo
   let strength = 0;
   if (/[A-Z]/.test(password)) strength++;
