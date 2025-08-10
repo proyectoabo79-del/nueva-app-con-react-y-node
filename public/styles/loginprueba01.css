@@ -27,11 +27,12 @@ body{
     overflow: hidden;
 }
 .container-form form{
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    transform: transform 0.5s ease-in;
 }
 .container-form form h2{
     font-size: 30px;
@@ -69,7 +70,7 @@ body{
     margin-bottom: 20px;
     margin-top: 56px;
 }
-.btn{
+.botton{
     width: 170px;
     height: 45px;
     font-size: 15px;
@@ -82,3 +83,32 @@ body{
 }
 
 /* posible animacion formulario completo */
+
+
+.sign-up{
+    transform: translatex(-100%);
+}
+
+.container.toggle .sign-in{
+    transform: translatex(100);
+}
+.container.toggle .sign-up{
+    transform: translatex(0);
+}
+
+
+/*welcome benvenidos al himalaya */
+
+.container-welcome{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+}
