@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISITANTES - Inspecciones Preoperativas</title>
     <link rel="stylesheet" href="styles/VISITANTES.css">
-        <link rel="stylesheet" href="styles/main.css">
-
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     
@@ -17,111 +16,114 @@
 
     <div class="attractions-grid">
         <!-- Fila 1 -->
-        <div class="attraction-card" onclick="openLogin('montana-rusa')">
+        <div class="attraction-card" onclick="navigateToAttraction('montana-rusa')">
             <div class="attraction-icon">🎢</div>
-            <div class="attraction-name"><a href="#">Montaña Rusa</a></div>
+            <div class="attraction-name"><a href="rusa.html">Montaña Rusa</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('rueda-fortuna')">
+        <div class="attraction-card" onclick="navigateToAttraction('rueda-fortuna')">
             <div class="attraction-icon">🎡</div>
             <div class="attraction-name"><a href="#">Rueda de la Fortuna</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('carrusel')">
+        <div class="attraction-card" onclick="navigateToAttraction('carrusel')">
             <div class="attraction-icon">🎠</div>
             <div class="attraction-name"><a href="#">Carrusel Mágico</a></div>
             <div class="attraction-status status-completado">Completado</div>
         </div>
 
         <!-- Fila 2 -->
-        <div class="attraction-card" onclick="openLogin('casa-terror')">
+        <div class="attraction-card" onclick="navigateToAttraction('casa-terror')">
             <div class="attraction-icon">👻</div>
             <div class="attraction-name"><a href="#">Casa del Terror</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('bumper-cars')">
+        <div class="attraction-card" onclick="navigateToAttraction('bumper-cars')">
             <div class="attraction-icon">🚗</div>
             <div class="attraction-name"><a href="#">Carros Chocones</a></div>
             <div class="attraction-status status-error">Error</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('barcos-piratas')">
+        <div class="attraction-card" onclick="navigateToAttraction('barcos-piratas')">
             <div class="attraction-icon">🚢</div>
             <div class="attraction-name"><a href="#">Barcos Piratas</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
 
         <!-- Fila 3 -->
-        <div class="attraction-card" onclick="openLogin('tobogan-gigante')">
+        <div class="attraction-card" onclick="navigateToAttraction('tobogan-gigante')">
             <div class="attraction-icon">🛝</div>
             <div class="attraction-name"><a href="#">Tobogán Gigante</a></div>
             <div class="attraction-status status-completado">Completado</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('tren-fantasma')">
+        <div class="attraction-card" onclick="navigateToAttraction('tren-fantasma')">
             <div class="attraction-icon">🚂</div>
             <div class="attraction-name"><a href="#">Tren Fantasma</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('laberinto')">
+        <div class="attraction-card" onclick="navigateToAttraction('laberinto')">
             <div class="attraction-icon">🌽</div>
             <div class="attraction-name"><a href="#">Laberinto de Maíz</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
 
         <!-- Fila 4 -->
-        <div class="attraction-card" onclick="openLogin('sillas-voladoras')">
+        <div class="attraction-card" onclick="navigateToAttraction('sillas-voladoras')">
             <div class="attraction-icon">🪑</div>
             <div class="attraction-name"><a href="#">Sillas Voladoras</a></div>
             <div class="attraction-status status-completado">Completado</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('rio-rapidos')">
+        <div class="attraction-card" onclick="navigateToAttraction('rio-rapidos')">
             <div class="attraction-icon">🌊</div>
             <div class="attraction-name"><a href="#">Río de Rápidos</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('torre-caida')">
+        <div class="attraction-card" onclick="navigateToAttraction('torre-caida')">
             <div class="attraction-icon">🗼</div>
             <div class="attraction-name"><a href="#">Torre de Caída</a></div>
             <div class="attraction-status status-error">Error</div>
         </div>
 
         <!-- Fila 5 -->
-        <div class="attraction-card" onclick="openLogin('simulador-4d')">
+        <div class="attraction-card" onclick="navigateToAttraction('simulador-4d')">
             <div class="attraction-icon">🎬</div>
             <div class="attraction-name"><a href="#">Simulador 4D</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('tirolesa')">
+        <div class="attraction-card" onclick="navigateToAttraction('tirolesa')">
             <div class="attraction-icon">🪁</div>
             <div class="attraction-name"><a href="#">Tirolesa Extrema</a></div>
             <div class="attraction-status status-completado">Completado</div>
         </div>
         
-        <div class="attraction-card" onclick="openLogin('piscina-pelotas')">
+        <div class="attraction-card" onclick="navigateToAttraction('piscina-pelotas')">
             <div class="attraction-icon">⚽</div>
             <div class="attraction-name"><a href="#">Piscina de Pelotas</a></div>
             <div class="attraction-status status-pendiente">Pendiente</div>
         </div>
     </div>
-            <div class="attraction-card" onclick="openLogin('piscina-pelotas')">
-            <div class="attraction-icon">📤</div>
-            <div class="attraction-name"><a href="#">Regresar</a></div>
+
+    <!-- Botones de navegación centrados -->
+    <div class="navigation-buttons">
+        <div class="nav-button" onclick="goBack()">
+            <div class="nav-icon">📤</div>
+            <div class="nav-text"><a href="index.html">Regresar</a></div>
+        </div>
+        
+        <div class="nav-button" onclick="newRequest()">
+            <div class="nav-icon">📄</div>
+            <div class="nav-text">Nueva Solicitud</div>
         </div>
     </div>
-     </div>
-            <div class="attraction-card" onclick="openLogin('piscina-pelotas')">
-            <div class="attraction-icon">📄</div>
-            <div class="attraction-name"><a href="#">Nueva solicitud, mejora.</a></div>
-        </div>
-    </div>
+
     <script src="js/visitantes.js"></script>
 </body>
 </html>

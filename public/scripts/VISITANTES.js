@@ -1,18 +1,125 @@
 /**
  * VISITANTES.JS
  * Sistema de Inspecciones Preoperativas - Parque del Café
- * Dashboard de Atracciones
+ * Dashboard de Atracciones - Versión Mejorada
  */
 
-// Función para abrir el login de cada atracción
-function openLogin(attractionId) {
-    // Redirigir a la página de login específica para cada atracción
-    window.location.href = `login-${attractionId}.html`;
+// Función para navegar a cada atracción específica
+function navigateToAttraction(attractionId) {
+    console.log(`Navegando a la atracción: ${attractionId}`);
+    
+    // Aquí puedes definir diferentes acciones según la atracción
+    switch(attractionId) {
+        case 'montana-rusa':
+            window.location.href = `inspection-montana-rusa.html`;
+            break;
+        case 'rueda-fortuna':
+            window.location.href = `inspection-rueda-fortuna.html`;
+            break;
+        case 'carrusel':
+            window.location.href = `inspection-carrusel.html`;
+            break;
+        case 'casa-terror':
+            window.location.href = `inspection-casa-terror.html`;
+            break;
+        case 'bumper-cars':
+            window.location.href = `inspection-bumper-cars.html`;
+            break;
+        case 'barcos-piratas':
+            window.location.href = `inspection-barcos-piratas.html`;
+            break;
+        case 'tobogan-gigante':
+            window.location.href = `inspection-tobogan-gigante.html`;
+            break;
+        case 'tren-fantasma':
+            window.location.href = `inspection-tren-fantasma.html`;
+            break;
+        case 'laberinto':
+            window.location.href = `inspection-laberinto.html`;
+            break;
+        case 'sillas-voladoras':
+            window.location.href = `inspection-sillas-voladoras.html`;
+            break;
+        case 'rio-rapidos':
+            window.location.href = `inspection-rio-rapidos.html`;
+            break;
+        case 'torre-caida':
+            window.location.href = `inspection-torre-caida.html`;
+            break;
+        case 'simulador-4d':
+            window.location.href = `inspection-simulador-4d.html`;
+            break;
+        case 'tirolesa':
+            window.location.href = `inspection-tirolesa.html`;
+            break;
+        case 'piscina-pelotas':
+            window.location.href = `inspection-piscina-pelotas.html`;
+            break;
+        default:
+            // Página genérica de inspección
+            window.location.href = `inspection-generic.html?attraction=${attractionId}`;
+            break;
+    }
+}
+
+// Función para regresar a la página anterior
+function goBack() {
+    console.log('Regresando a la página anterior');
+    
+    // Verificar si hay historial
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        // Si no hay historial, ir a la página principal
+        window.location.href = 'index.html';
+    }
+}
+
+// Función para crear nueva solicitud
+function newRequest() {
+    console.log('Creando nueva solicitud');
+    
+    // Redirigir a la página de nueva solicitud
+    window.location.href = 'nueva-solicitud.html';
+    
+    // Alternativa: Mostrar modal de confirmación
+    // showNewRequestModal();
+}
+
+// Función para mostrar modal de nueva solicitud (opcional)
+function showNewRequestModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Nueva Solicitud</h2>
+            <p>¿Desea crear una nueva solicitud de inspección?</p>
+            <div class="modal-buttons">
+                <button onclick="confirmNewRequest()" class="btn-confirm">Sí, crear</button>
+                <button onclick="closeModal()" class="btn-cancel">Cancelar</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Función para confirmar nueva solicitud
+function confirmNewRequest() {
+    closeModal();
+    window.location.href = 'nueva-solicitud.html';
+}
+
+// Función para cerrar modal
+function closeModal() {
+    const modal = document.querySelector('.modal-overlay');
+    if (modal) {
+        modal.remove();
+    }
 }
 
 // Función para actualizar el estado de una atracción
 function updateAttractionStatus(attractionId, newStatus) {
-    const attraction = document.querySelector(`[onclick="openLogin('${attractionId}')"]`);
+    const attraction = document.querySelector(`[onclick*="'${attractionId}'"]`);
     if (attraction) {
         const statusElement = attraction.querySelector('.attraction-status');
         
@@ -35,10 +142,13 @@ function updateAttractionStatus(attractionId, newStatus) {
                 statusElement.textContent = 'Pendiente';
                 break;
         }
+        
+        // Guardar el estado
+        saveAttractionStatus(attractionId, newStatus);
     }
 }
 
-// Función para cargar estados desde localStorage (si existen)
+// Función para cargar estados desde localStorage
 function loadAttractionStates() {
     const attractions = [
         'montana-rusa', 'rueda-fortuna', 'carrusel', 'casa-terror', 'bumper-cars',
@@ -58,11 +168,14 @@ function loadAttractionStates() {
 // Función para guardar estado en localStorage
 function saveAttractionStatus(attractionId, status) {
     localStorage.setItem(`status-${attractionId}`, status);
+    localStorage.setItem(`last-update-${attractionId}`, new Date().toISOString());
 }
 
-// Animación de entrada para las tarjetas
+// Animación de entrada para las tarjetas mejorada
 function animateCards() {
     const cards = document.querySelectorAll('.attraction-card');
+    const navButtons = document.querySelectorAll('.nav-button');
+    
     cards.forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
@@ -70,7 +183,20 @@ function animateCards() {
             card.style.transition = 'all 0.5s ease';
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
+            card.classList.add('animate');
         }, index * 100);
+    });
+    
+    // Animar botones de navegación
+    navButtons.forEach((button, index) => {
+        button.style.opacity = '0';
+        button.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            button.style.transition = 'all 0.5s ease';
+            button.style.opacity = '1';
+            button.style.transform = 'translateY(0)';
+            button.classList.add('animate');
+        }, (cards.length * 100) + (index * 200));
     });
 }
 
@@ -98,7 +224,7 @@ function getDashboardStats() {
     return stats;
 }
 
-// Función para mostrar estadísticas en consola (para debug)
+// Función para mostrar estadísticas en consola
 function showStats() {
     const stats = getDashboardStats();
     console.log('📊 Estadísticas del Dashboard:');
@@ -147,7 +273,6 @@ function updateCurrentTime() {
         second: '2-digit'
     });
     
-    // Si existe un elemento para mostrar la hora, lo actualiza
     const timeElement = document.getElementById('current-time');
     if (timeElement) {
         timeElement.textContent = timeString;
@@ -156,32 +281,13 @@ function updateCurrentTime() {
     return timeString;
 }
 
-// Event Listeners
-document.addEventListener('DOMContentLoaded', function() {
-    // Cargar estados guardados
-    loadAttractionStates();
-    
-    // Ejecutar animación de entrada
-    animateCards();
-    
-    // Mostrar estadísticas iniciales
-    showStats();
-    
-    // Actualizar hora cada segundo (si existe el elemento)
-    setInterval(updateCurrentTime, 1000);
-    
-    console.log('🎢 Dashboard de Atracciones cargado correctamente');
-    console.log('📱 Para ver estadísticas, usa: showStats()');
-    console.log('🔍 Para filtrar atracciones, usa: filterAttractions("completado"|"pendiente"|"error"|"all")');
-});
-
-// Función para exportar datos (para uso futuro con APIs)
+// Función para exportar datos del dashboard
 function exportDashboardData() {
     const attractions = [];
     const cards = document.querySelectorAll('.attraction-card');
     
     cards.forEach(card => {
-        const name = card.querySelector('.attraction-name').textContent;
+        const name = card.querySelector('.attraction-name a').textContent;
         const icon = card.querySelector('.attraction-icon').textContent;
         const statusElement = card.querySelector('.attraction-status');
         let status = 'pendiente';
@@ -192,14 +298,15 @@ function exportDashboardData() {
             status = 'error';
         }
         
-        const attractionId = card.getAttribute('onclick').match(/'([^']+)'/)[1];
+        const onclickAttr = card.getAttribute('onclick');
+        const attractionId = onclickAttr.match(/'([^']+)'/)[1];
         
         attractions.push({
             id: attractionId,
-            name: name,
+            name: name.trim(),
             icon: icon,
             status: status,
-            lastUpdate: new Date().toISOString()
+            lastUpdate: localStorage.getItem(`last-update-${attractionId}`) || new Date().toISOString()
         });
     });
     
@@ -210,8 +317,60 @@ function exportDashboardData() {
     };
 }
 
-// Hacer funciones disponibles globalmente para debug
+// Función para búsqueda de atracciones
+function searchAttractions(query) {
+    const cards = document.querySelectorAll('.attraction-card');
+    const searchTerm = query.toLowerCase();
+    
+    cards.forEach(card => {
+        const name = card.querySelector('.attraction-name a').textContent.toLowerCase();
+        const isMatch = name.includes(searchTerm);
+        card.style.display = isMatch ? 'block' : 'none';
+    });
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Cargar estados guardados
+    loadAttractionStates();
+    
+    // Ejecutar animación de entrada
+    setTimeout(animateCards, 100);
+    
+    // Mostrar estadísticas iniciales
+    showStats();
+    
+    // Actualizar hora cada segundo
+    setInterval(updateCurrentTime, 1000);
+    
+    // Agregar eventos de teclado para navegación
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            goBack();
+        }
+        if (e.ctrlKey && e.key === 'n') {
+            e.preventDefault();
+            newRequest();
+        }
+    });
+    
+    console.log('🎢 Dashboard de Atracciones cargado correctamente');
+    console.log('📱 Funciones disponibles:');
+    console.log('  - showStats(): Ver estadísticas');
+    console.log('  - filterAttractions("status"): Filtrar por estado');
+    console.log('  - searchAttractions("término"): Buscar atracciones');
+    console.log('  - exportDashboardData(): Exportar datos');
+    console.log('⌨️ Atajos de teclado:');
+    console.log('  - Escape: Regresar');
+    console.log('  - Ctrl+N: Nueva solicitud');
+});
+
+// Hacer funciones disponibles globalmente
+window.navigateToAttraction = navigateToAttraction;
+window.goBack = goBack;
+window.newRequest = newRequest;
 window.showStats = showStats;
 window.filterAttractions = filterAttractions;
 window.exportDashboardData = exportDashboardData;
 window.updateAttractionStatus = updateAttractionStatus;
+window.searchAttractions = searchAttractions;
