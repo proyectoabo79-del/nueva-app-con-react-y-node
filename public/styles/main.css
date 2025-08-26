@@ -107,7 +107,7 @@ body {
 
 .dashboard-card {
     background: rgba(245, 230, 211, 0.95);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
@@ -242,13 +242,14 @@ body {
 }
 
 /* Footer */
-.footer {
-    background: rgba(101, 67, 33, 0.95);
+/* Footer */
+footer {
+    background: rgba(101, 67, 33, 0.9); 
     backdrop-filter: blur(10px);
-    color: #F5E6D3;
+    color: #f4f1e8;
     text-align: center;
     padding: 1.5rem 0;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 -4px 20px rgba(101, 67, 33, 0.3);
 }
 
 .footer p {

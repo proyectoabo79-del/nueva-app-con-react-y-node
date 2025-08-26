@@ -1,90 +1,223 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Reportes en lista</title>
-  <link rel="stylesheet" href="styles/reportesmain.css">
-    <link rel="stylesheet" href="styles/main.css">
-  <!-- Chart.js para gráficos -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- jsPDF para PDF -->
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
-      <!-- Se creó un archivo CSS separado -->
-<link rel="stylesheet" href="styles/responsive.css">
-
-
-
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Parque del Café</title>
+    <link rel="stylesheet" href="styles/reportesmain.css">
+    <!-- jsPDF Library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- jsPDF AutoTable plugin for table formatting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Parque del Café</a>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="nav-link">Inicio</a></li>
-                <li><a href="solicitudes.html" class="nav-link">Solicitudes</a></li>
-                <li><a href="registradora.html" class="nav-link">Registradora</a></li>
-            </ul>
-            
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-chart-bar"></i> Reportes del Sistema</h1>
+            <p>Gestión y análisis de datos de inspecciones</p>
+        </header>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Buscar en todas las tablas..." class="search-input">
+                <button id="clearSearch" class="clear-btn" title="Limpiar búsqueda">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-filters">
+                <select id="tableFilter" class="filter-select">
+                    <option value="all">Buscar en todas las tablas</option>
+                    <option value="inspecciones">Solo en Inspecciones</option>
+                    <option value="visitantes">Solo en Visitantes</option>
+                    <option value="incidentes">Solo en Incidentes</option>
+                </select>
             </div>
         </div>
-    </nav>
-</body>
-<br>
-<body>
-  <section id="zona-reportes">
-    <h1>Zona de Reportes </h1>
-    <button onclick="descargarPDF()">Descargar PDF</button>
-    <h2>Clasificación de Registros por Mes/Año</h2>
-    <table id="tabla-clasificacion">
-      <thead>
-        <tr>
-          <th>Año</th>
-          <th>Mes</th>
-          <th>Solicitudes</th>
-          <th>Inspecciones</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Ejemplo de datos, puedes generarlos dinámicamente con JS -->
-        <tr>
-          <td>2025</td>
-          <td>Enero</td>
-          <td>120</td>
-          <td>80</td>
-          <td>200</td>
-        </tr>
-        <tr>
-          <td>2025</td>
-          <td>Febrero</td>
-          <td>95</td>
-          <td>100</td>
-          <td>195</td>
-        </tr>
-        <tr>
-          <td>2024</td>
-          <td>Febrero</td>
-          <td>60</td>
-          <td>50</td>
-          <td>110</td>
-        </tr>
-        <!-- ...más registros -->
-      </tbody>
-    </table>
-    <h2>Comparativa Gráfica</h2>
-    <canvas id="graficoReporte" width="600" height="300"></canvas>
-  </section>
 
-  <script src="scripts/reportes.js"></script>
-</body>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button id="downloadPDF" class="btn btn-primary">
+                <i class="fas fa-file-pdf"></i> Descargar PDF
+            </button>
+            <button id="exportExcel" class="btn btn-secondary">
+                <i class="fas fa-file-excel"></i> Exportar Excel
+            </button>
+            <button id="refreshData" class="btn btn-tertiary">
+                <i class="fas fa-sync-alt"></i> Actualizar Datos
+            </button>
+            <button id="regresar" class="btn btn-tertiary">
+                <i class="fas fa-file-pdf"><a href="index.html"></i> Regresar
+            </button></a>
+        </div>s
+
+        <!-- Results Counter -->
+        <div id="searchResults" class="search-results" style="display: none;">
+            <span id="resultsText"></span>
+        </div>
+
+        <!-- Inspecciones Table -->
+        <section class="table-section">
+            <h2><i class="fas fa-clipboard-check"></i> Inspecciones Realizadas</h2>
+            <div class="table-container">
+                <table id="inspecciones" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Inspector</th>
+                            <th>Área</th>
+                            <th>Estado</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INS-001</td>
+                            <td>2024-01-15</td>
+                            <td>Juan Pérez</td>
+                            <td>Montaña Rusa Principal</td>
+                            <td><span class="status approved">Aprobado</span></td>
+                            <td>Inspección rutinaria completada sin observaciones</td>
+                        </tr>
+                        <tr>
+                            <td>INS-002</td>
+                            <td>2024-01-16</td>
+                            <td>María García</td>
+                            <td>Área de Juegos Infantiles</td>
+                            <td><span class="status pending">Pendiente</span></td>
+                            <td>Requiere revisión de sistema de seguridad</td>
+                        </tr>
+                        <tr>
+                            <td>INS-003</td>
+                            <td>2024-01-17</td>
+                            <td>Carlos Rodriguez</td>
+                            <td>Casa del Terror</td>
+                            <td><span class="status rejected">Rechazado</span></td>
+                            <td>Fallas en sistema de iluminación de emergencia</td>
+                        </tr>
+                        <tr>
+                            <td>INS-004</td>
+                            <td>2024-01-18</td>
+                            <td>Ana López</td>
+                            <td>Restaurante Central</td>
+                            <td><span class="status approved">Aprobado</span></td>
+                            <td>Cumple con todos los estándares de higiene</td>
+                        </tr>
+                        <tr>
+                            <td>INS-005</td>
+                            <td>2024-01-19</td>
+                            <td>Luis Martínez</td>
+                            <td>Teleférico</td>
+                            <td><span class="status approved">Aprobado</span></td>
+                            <td>Sistema operativo en óptimas condiciones</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- Incidentes Table -->
+        <section class="table-section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Registro de Incidentes</h2>
+            <div class="table-container">
+                <table id="incidentes" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Ubicación</th>
+                            <th>Tipo</th>
+                            <th>Severidad</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INC-001</td>
+                            <td>2024-01-15</td>
+                            <td>14:30</td>
+                            <td>Montaña Rusa</td>
+                            <td>Técnico</td>
+                            <td><span class="severity low">Baja</span></td>
+                            <td>Ruido inusual en motor principal</td>
+                        </tr>
+                        <tr>
+                            <td>INC-002</td>
+                            <td>2024-01-16</td>
+                            <td>11:15</td>
+                            <td>Área de Food Court</td>
+                            <td>Seguridad</td>
+                            <td><span class="severity medium">Media</span></td>
+                            <td>Visitante reporta caída en área húmeda</td>
+                        </tr>
+                        <tr>
+                            <td>INC-003</td>
+                            <td>2024-01-17</td>
+                            <td>16:45</td>
+                            <td>Casa del Terror</td>
+                            <td>Técnico</td>
+                            <td><span class="severity high">Alta</span></td>
+                            <td>Falla completa en sistema de iluminación</td>
+                        </tr>
+                        <tr>
+                            <td>INC-004</td>
+                            <td>2024-01-18</td>
+                            <td>09:20</td>
+                            <td>Entrada Principal</td>
+                            <td>Operacional</td>
+                            <td><span class="severity low">Baja</span></td>
+                            <td>Demora en apertura por revisión de sistemas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Statistics Summary -->
+        <section class="stats-section">
+            <h2><i class="fas fa-chart-pie"></i> Resumen Estadístico</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-clipboard-check stat-icon"></i>
+                    <div class="stat-content">
+                        <h3>Total Inspecciones</h3>
+                        <p class="stat-number">5</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users stat-icon"></i>
+                    <div class="stat-content">
+                        <h3>Total Visitantes</h3>
+                        <p class="stat-number">5</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-exclamation-triangle stat-icon"></i>
+                    <div class="stat-content">
+                        <h3>Incidentes Reportados</h3>
+                        <p class="stat-number">4</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle stat-icon"></i>
+                    <div class="stat-content">
+                        <h3>Inspecciones Aprobadas</h3>
+                        <p class="stat-number">60%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- No results message -->
+    <div id="noResults" class="no-results" style="display: none;">
+        <i class="fas fa-search"></i>
+        <h3>No se encontraron resultados</h3>
+        <p>No hay datos que coincidan con tu búsqueda</p>
+    </div>
+    <script src="reportes.js"></script>
 </html>
