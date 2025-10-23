@@ -21,5 +21,7 @@ function App() {
     </div>
   );
 }
+const reportRoutes = require('./routes/report');
+app.use('/api/report', reportRoutes);
 
 export default App;

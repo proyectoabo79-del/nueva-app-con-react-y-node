@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Inspección Preoperativa - Parque del Café</title>
+    <link rel="stylesheet" href="styles/INP.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>PARQUE DEL CAFÉ</h1>
+            <div class="header-nav">
+                <a href="#" class="nav-link">Inicio</a>
+                <a href="#" class="nav-link">Reportes</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h2 class="page-title">Sistema de Inspección Preoperativa - Parque del Café</h2>
+            
+            <!-- Selector de Atracción -->
+            <div class="attraction-selector">
+                <h3>Seleccionar Atracción</h3>
+                <div class="search-container">
+                    <input type="text" id="attractionSearch" placeholder="Buscar atracción..." class="search-input">
+                    <div id="attractionResults" class="search-results"></div>
+                </div>
+            </div>
+
+            <!-- Formulario de Inspección -->
+            <div id="inspectionForm" class="inspection-form" style="display: none;">
+                <h3 id="selectedAttractionTitle">Formulario de Inspección</h3>
+                
+                <form id="inspectionFormData">
+                    <div class="form-section">
+                        <h4>Información General</h4>
+                        <div class="form-group">
+                            <label for="inspectionDate">Fecha de Inspección:</label>
+                            <input type="date" id="inspectionDate" name="inspectionDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inspector">Inspector:</label>
+                            <input type="text" id="inspector" name="inspector" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="shift">Turno:</label>
+                            <select id="shift" name="shift" required>
+                                <option value="">Seleccionar turno</option>
+                                <option value="mañana">Mañana</option>
+                                <option value="tarde">Tarde</option>
+                                <option value="noche">Noche</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Estado General de la Atracción</h4>
+                        <div class="form-group">
+                            <label for="generalCondition">Estado General:</label>
+                            <select id="generalCondition" name="generalCondition" required>
+                                <option value="">Seleccionar estado</option>
+                                <option value="excelente">Excelente</option>
+                                <option value="bueno">Bueno</option>
+                                <option value="regular">Regular</option>
+                                <option value="malo">Malo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Aspectos de Seguridad</h4>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="safetyChecks" value="estructura">
+                                <span class="checkmark"></span>
+                                Estructura en buen estado
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="safetyChecks" value="barandas">
+                                <span class="checkmark"></span>
+                                Barandas y protecciones seguras
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="safetyChecks" value="señalizacion">
+                                <span class="checkmark"></span>
+                                Señalización visible y clara
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="safetyChecks" value="iluminacion">
+                                <span class="checkmark"></span>
+                                Iluminación adecuada
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="safetyChecks" value="emergencia">
+                                <span class="checkmark"></span>
+                                Sistema de emergencia operativo
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Aspectos Mecánicos</h4>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="mechanicalChecks" value="motores">
+                                <span class="checkmark"></span>
+                                Motores funcionando correctamente
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="mechanicalChecks" value="frenos">
+                                <span class="checkmark"></span>
+                                Sistema de frenos operativo
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="mechanicalChecks" value="sensores">
+                                <span class="checkmark"></span>
+                                Sensores de seguridad funcionando
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="mechanicalChecks" value="lubricacion">
+                                <span class="checkmark"></span>
+                                Sistema de lubricación adecuado
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Observaciones</h4>
+                        <div class="form-group">
+                            <label for="observations">Observaciones adicionales:</label>
+                            <textarea id="observations" name="observations" rows="4" placeholder="Ingrese observaciones adicionales..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4>Estado Final</h4>
+                        <div class="form-group">
+                            <label for="finalStatus">Estado de la inspección:</label>
+                            <select id="finalStatus" name="finalStatus" required>
+                                <option value="">Seleccionar estado</option>
+                                <option value="aprobada">Aprobada</option>
+                                <option value="aprobada_observaciones">Aprobada con observaciones</option>
+                                <option value="rechazada">Rechazada</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="cancelForm()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Inspección</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Loading y mensajes -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Guardando inspección...</p>
+            </div>
+
+            <div id="message" class="message" style="display: none;"></div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
