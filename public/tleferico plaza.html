@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspección Preoperativa - Atracciones</title>
+    <link rel="stylesheet" href="styles/tlf.css">
+    <link rel="stylesheet"  href="scripts/">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Inspección Preoperativa</h1>
+            <p>Control diario de atracciones mecánicas y acuáticas</p>
+        </header>
+
+        <div class="selection-section">
+            <label for="atraccion-select">Seleccione la Atracción:</label>
+            <select id="atraccion-select">
+                <option value="">-- Seleccione una atracción --</option>
+                <option value="teleferico">Teleférico</option>
+                <option value="cabinas">Inspección de Cabinas</option>
+                <option value="area-trabajo">Área de Trabajo</option>
+                <option value="control-sistema">Sistema de Control</option>
+            </select>
+        </div>
+
+        <!-- Formulario Teleférico -->
+        <div id="form-teleferico" class="inspection-form" style="display:none;">
+            <h2>Inspección Preoperativa - Teleférico</h2>
+            
+            <div class="info-section">
+                <div class="info-row">
+                    <label>Fecha:</label>
+                    <input type="date" id="fecha-teleferico" required>
+                </div>
+                <div class="info-row">
+                    <label>Día:</label>
+                    <select id="dia-teleferico">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="inspection-table">
+                <thead>
+                    <tr>
+                        <th>Item de Inspección</th>
+                        <th>Estado</th>
+                        <th>Observaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hora de apertura (Primer ciclo con visitantes)</td>
+                        <td><input type="time" class="time-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Hora de cierre (Último ciclo con visitantes)</td>
+                        <td><input type="time" class="time-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Registradora Inicial Estación 1</td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Registradora Final Estación 1</td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Registradora Inicial Estación 2</td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Registradora Final Estación 2</td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Número de cabinas en operación</td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Operario Estación 1</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Auxiliar Estación 1</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Operario Estación 2</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Auxiliar Estación 2</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Auxiliar</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Fuera de operación (hora salida - hora entrada)</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="obs-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Motivo salida de operación</td>
+                        <td colspan="2"><textarea class="textarea-input"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="signature-section">
+                <h3>Firmas de Mantenimiento</h3>
+                <div class="signature-grid">
+                    <div class="signature-item">
+                        <label>Firma Mantenedor 1:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                    <div class="signature-item">
+                        <label>Firma Mantenedor 2:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-save" onclick="guardarInspeccion('teleferico')">Guardar Inspección</button>
+        </div>
+
+        <!-- Formulario Área de Trabajo -->
+        <div id="form-area-trabajo" class="inspection-form" style="display:none;">
+            <h2>Inspección del Área de Trabajo</h2>
+            
+            <div class="info-section">
+                <div class="info-row">
+                    <label>Fecha:</label>
+                    <input type="date" id="fecha-area" required>
+                </div>
+            </div>
+
+            <table class="inspection-table">
+                <thead>
+                    <tr>
+                        <th>Inspección Visual de:</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cercas (cerramiento, perímetro), puertas, chapas, rejas, tarros de basura</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Botiquín, camilla, inmovilizador cervical, vigencia del extintor, punto secuestro</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Pintura y decoración</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Avisos o reglas de medida, reglamento y señalización</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Panel de control (etiquetas indicadoras, pulsadores, indicadores)</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Inspección Funcional de:</h3>
+            <table class="inspection-table">
+                <tbody>
+                    <tr>
+                        <td>Equipo de comunicación (teléfono y radio)</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Iluminación de la atracción</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Registradora</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Equipo de monitoreo de velocidad del viento</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Inspección Visual y Aseo:</h3>
+            <table class="inspection-table">
+                <tbody>
+                    <tr>
+                        <td>Entradas, salidas, plataforma de cargue y descargue, puertas y seguros</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Zonas verdes</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="observations-section">
+                <h3>Observaciones por día:</h3>
+                <label>Lunes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Martes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Miércoles:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Jueves:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Viernes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Sábado:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Domingo:</label>
+                <textarea class="textarea-input"></textarea>
+            </div>
+
+            <button class="btn-save" onclick="guardarInspeccion('area-trabajo')">Guardar Inspección</button>
+        </div>
+
+        <!-- Formulario Sistema de Control -->
+        <div id="form-control-sistema" class="inspection-form" style="display:none;">
+            <h2>Inspección Sistema de Control, Encendido y Prueba</h2>
+            
+            <div class="info-section">
+                <div class="info-row">
+                    <label>Fecha:</label>
+                    <input type="date" id="fecha-control" required>
+                </div>
+            </div>
+
+            <table class="inspection-table">
+                <thead>
+                    <tr>
+                        <th>Item de Inspección</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Revise el estado y funcionamiento del Motor auxiliar (vibraciones, aceite, agua, combustible)</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Revise el estado y funcionamiento de los controles del sistema de control (interruptores, pulsadores, indicadores luminosos, etc.)</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Sistema de 24V (navegador, baterías)</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Apoye la vuelta de operación semanal con motor auxiliar (jueves)</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Opere la atracción por un ciclo completo</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Pruebe los controles, frenos y sistemas de seguridad de la atracción</td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                        <td><input type="checkbox" class="check-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="observations-section">
+                <h3>Observaciones por día:</h3>
+                <label>Lunes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Martes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Miércoles:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Jueves:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Viernes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Sábado:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Domingo:</label>
+                <textarea class="textarea-input"></textarea>
+            </div>
+
+            <div class="signature-section">
+                <h3>Firmas de Operarios y Supervisión</h3>
+                <div class="signature-grid">
+                    <div class="signature-item">
+                        <label>Firma Operario 1 Estación 1:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                    <div class="signature-item">
+                        <label>Firma Operario 2 Estación 1:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                    <div class="signature-item">
+                        <label>Firma Auxiliares Estación 1:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                    <div class="signature-item">
+                        <label>Firma Operario 1 Estación 2:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                    <div class="signature-item">
+                        <label>Firma Operario 2 Estación 2:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                    <div class="signature-item">
+                        <label>Firma Auxiliares Estación 2:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                    <div class="signature-item">
+                        <label>Supervisión:</label>
+                        <input type="text" placeholder="Nombre">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-save" onclick="guardarInspeccion('control-sistema')">Guardar Inspección</button>
+        </div>
+
+        <!-- Formulario Inspección de Cabinas -->
+        <div id="form-cabinas" class="inspection-form" style="display:none;">
+            <h2>Inspección de las Cabinas</h2>
+            
+            <div class="info-section">
+                <div class="info-row">
+                    <label>Fecha:</label>
+                    <input type="date" id="fecha-cabinas" required>
+                </div>
+            </div>
+
+            <table class="inspection-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Operario</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Operario</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Total cabinas disponibles para operación: OP</td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Total cabinas en mantenimiento MT</td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                        <td><input type="number" class="num-input"></td>
+                    </tr>
+                    <tr>
+                        <td>Escriba los números de las cabinas en mantenimiento MT</td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                        <td><input type="text" class="text-input"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="observations-section">
+                <h3>Observaciones por día:</h3>
+                <label>Lunes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Martes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Miércoles:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Jueves:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Viernes:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Sábado:</label>
+                <textarea class="textarea-input"></textarea>
+                <label>Domingo:</label>
+                <textarea class="textarea-input"></textarea>
+            </div>
+
+            <button class="btn-save" onclick="guardarInspeccion('cabinas')">Guardar Inspección</button>
+        </div>
+
+        <!-- Sección de Historial -->
+        <div class="history-section">
+            <h2>Historial de Inspecciones</h2>
+            <div class="filter-section">
+                <select id="filter-atraccion">
+                    <option value="">Todas las atracciones</option>
+                    <option value="teleferico">Teleférico</option>
+                    <option value="cabinas">Cabinas</option>
+                    <option value="area-trabajo">Área de Trabajo</option>
+                    <option value="control-sistema">Sistema de Control</option>
+                </select>
+                <button onclick="filtrarHistorial()">Filtrar</button>
+                <button onclick="exportarHistorial()">Exportar a PDF</button>
+            </div>
+            <div id="historial-lista"></div>
+        </div>
+    </div>
+
+    <script src="inspeccion-preoperativa.js"></script>
+</body>
+</html>
